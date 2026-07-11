@@ -60,7 +60,7 @@ Apresentar os fluxos operacionais principais do Sistema de Gestão de Treinament
 
 1. O treinamento encerrado é selecionado.
 2. O sistema gera o PDF do certificado.
-3. O documento recebe identificador único e QR Code.
+3. O documento recebe identificador único.
 4. O certificado fica disponível para download e consulta.
 
 ## 9. Fluxo de Auditoria

@@ -38,7 +38,7 @@ Consolidar as regras que governam o comportamento do Sistema de Gestão de Trein
 - As fotografias deverão ser anexadas antes do encerramento do treinamento.
 - As evidências deverão permanecer vinculadas ao treinamento durante todo o período de retenção definido pela empresa.
 - Os certificados somente poderão ser emitidos após o encerramento do treinamento.
-- Cada certificado deverá possuir identificador único e QR Code para validação futura.
+- Cada certificado deverá possuir identificador único para validação futura.
 - Treinamentos encerrados deverão permanecer disponíveis para auditoria e consulta histórica.
 
 ## 6. Regras de Integridade e Auditoria

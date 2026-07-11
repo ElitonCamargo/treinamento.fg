@@ -87,5 +87,5 @@ Definir as características de qualidade da solução, incluindo segurança, des
 - RNF-CFG-001: o sistema deverá armazenar evidências suficientes para comprovação dos treinamentos.
 - RNF-CFG-002: as informações registradas deverão permitir rastrear quem realizou cada operação, quando ocorreu e quais dados foram alterados.
 - RNF-CFG-003: os registros históricos deverão ser preservados após a conclusão dos treinamentos.
-- RNF-CFG-004: os documentos emitidos deverão conter identificador único e QR Code para validação futura.
+- RNF-CFG-004: os documentos emitidos deverão conter identificador único para validação futura.
 - RNF-CFG-005: as evidências associadas a um treinamento deverão permanecer vinculadas ao respectivo registro durante todo o período de retenção.
