@@ -1,0 +1,425 @@
+** __ .env __ **
+
+DATABASE_URL="mysql://root:senha@localhost:3306/treinamento_fg"
+NODE_ENV=development
+PORT=3001
+JWT_SECRET=f14a8190ae1b4fb1&sxsrf=APpeQnuhMqgMhUhGfZ_TS6y-QksGf693yg%3A1785349426388&ei
+JWT_EXPIRES_IN=1h
+JWT_REFRESH_SECRET=f14a8190ae1b4fb1&sxsrf=APpeQnuhMqgMhUhGfZ_TS6y-QksGf693yg%3A1785349426388&ei
+JWT_REFRESH_EXPIRES_IN=7d
+LOG_LEVEL=trace
+
+** __ .env.example __ **
+
+# Aplicação
+NODE_ENV=development
+PORT=3000
+
+# Banco
+DATABASE_URL=mysql://usuario:senha@localhost:3306/treinamento_fg
+
+# Autenticação
+JWT_SECRET=troque-esta-chave
+JWT_EXPIRES_IN=15m
+
+JWT_REFRESH_SECRET=troque-outra-chave
+JWT_REFRESH_EXPIRES_IN=7d
+
+# Logs
+LOG_LEVEL=info
+
+** __ .gitignore __ **
+
+node_modules
+dist
+coverage
+
+.env
+.env.*
+
+!.env.example
+
+.vscode
+.idea
+
+.DS_Store
+
+*.log
+
+.prisma
+
+
+** __ .prettierignore __ **
+
+node_modules
+
+dist
+
+coverage
+
+prisma/migrations
+
+** __ Makefile __ **
+
+install:
+	npm install
+
+dev:
+	npm run dev
+
+build:
+	npm run build
+
+prisma-generate:
+	npm run prisma:generate
+
+prisma-migrate:
+	npm run prisma:migrate
+
+prisma-studio:
+	npm run prisma:studio
+	
+test:
+	npm test
+
+lint:
+	npm run lint
+
+format:
+	npm run format
+
+typecheck:
+	npm run typecheck
+
+
+** __ README.md __ **
+
+# Sistema de Gestão de Treinamentos
+
+Este repositório reúne a documentação consolidada do Sistema de Gestão de Treinamentos, organizada para apoiar a apresentação formal da proposta, a validação do escopo e a futura implementação da solução.
+
+## Acesso à documentação
+
+A estrutura principal está disponível em [docs/](docs/).
+
+## Escopo documental
+
+O conjunto documental contempla:
+
+- capa institucional;
+- proposta comercial;
+- especificação funcional;
+- regras de negócio;
+- requisitos funcionais;
+- requisitos não funcionais;
+- modelo de dados;
+- fluxos operacionais;
+- diagramas e materiais de apoio;
+- anexos complementares.
+
+## Direcionamento de leitura
+
+Para melhor compreensão da solução, recomenda-se a leitura na seguinte ordem:
+
+1. Capa e proposta comercial.
+2. Especificação funcional.
+3. Regras de negócio e requisitos.
+4. Modelo de dados e fluxos.
+5. Diagramas e anexos.
+
+## Observação
+
+Os artefatos binários oficiais previstos para a pasta de anexos deverão ser incorporados quando disponibilizados pela equipe responsável.
+
+
+** __ eslint.config.js __ **
+
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+import globals from "globals";
+import eslintConfigPrettier from "eslint-config-prettier";
+
+export default [
+  js.configs.recommended,
+
+  ...tseslint.configs.recommended,
+
+  {
+    files: ["**/*.ts"],
+
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+
+    rules: {
+      "no-console": "warn",
+
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
+
+  eslintConfigPrettier,
+];
+
+** __ package.json __ **
+
+{
+  "name": "treinamento-fg",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^9.1.0",
+    "@prisma/client": "^6.19.3",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "jsonwebtoken": "^9.0.3",
+    "pino": "^10.3.1",
+    "pino-http": "^11.0.0",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.20.1",
+    "@types/supertest": "^7.2.1",
+    "@types/swagger-ui-express": "^4.1.8",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.8.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "pino-pretty": "^13.1.3",
+    "prettier": "^3.9.6",
+    "prisma": "^6.19.3",
+    "supertest": "^7.2.2",
+    "tsx": "^4.23.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}
+
+
+** __ prettier.config.js __ **
+
+export default {
+  semi: true,
+
+  singleQuote: true,
+
+  trailingComma: 'all',
+
+  printWidth: 100,
+
+  tabWidth: 2,
+
+  arrowParens: 'always',
+};
+
+** __ prisma/schema.prisma __ **
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+** __ src/app.ts __ **
+
+import express from "express";
+
+const app = express();
+
+app.use(express.json());
+
+app.get("/health", (_request, response) => {
+  response.status(200).json({ status: "ok" });
+});
+
+export { app };
+
+** __ src/config/env.ts __ **
+
+import 'dotenv/config';
+import { z } from 'zod';
+
+const envSchema = z.object({
+  NODE_ENV: z.enum([
+    'development',
+    'test',
+    'production',
+  ]),
+
+  PORT: z.coerce.number().int().positive(),
+
+  DATABASE_URL: z.string().min(1),
+
+  JWT_SECRET: z.string().min(32),
+
+  JWT_EXPIRES_IN: z.string(),
+
+  JWT_REFRESH_SECRET: z.string().min(32),
+
+  JWT_REFRESH_EXPIRES_IN: z.string(),
+
+  LOG_LEVEL: z.enum([
+    'fatal',
+    'error',
+    'warn',
+    'info',
+    'debug',
+    'trace',
+  ]),
+});
+
+export const env = envSchema.parse(process.env);
+
+** __ src/config/openapi.ts __ **
+
+
+
+** __ src/core/logger/index.ts __ **
+
+import pino from 'pino';
+
+import { loggerOptions } from './options';
+
+export const logger = pino(loggerOptions);
+
+** __ src/core/logger/options.ts __ **
+
+import type { LoggerOptions } from 'pino';
+
+import { env } from '@/config/env';
+
+const developmentOptions: LoggerOptions =
+  env.NODE_ENV === 'development'
+    ? {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true,
+            translateTime: 'HH:MM:ss',
+            ignore: 'pid,hostname',
+          },
+        },
+      }
+    : {};
+
+export const loggerOptions: LoggerOptions = {
+  level: env.LOG_LEVEL,
+
+  ...developmentOptions,
+};
+
+** __ src/core/logger/redact.ts __ **
+
+export const redact = [
+  'req.headers.authorization',
+  'req.headers.cookie',
+  'password',
+  'refreshToken',
+];
+
+** __ src/server.ts __ **
+
+import { env } from '@/config/env';
+import { logger } from '@/core/logger';
+
+import { app } from "./app";
+
+const port = Number(env.PORT ?? 3000);
+
+app.listen(port, () => {
+  logger.info(`Server running in http://localhost:${port}`);
+});
+
+** __ tsconfig.json __ **
+
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "rootDir": "src",
+    "outDir": "dist",
+
+    "ignoreDeprecations": "6.0",
+
+    "baseUrl": "src",
+
+    "paths": {
+      "@/*": ["*"]
+    },
+
+    "strict": true,
+
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+
+    "skipLibCheck": true,
+
+    "forceConsistentCasingInFileNames": true
+  },
+
+  "include": [
+    "src",
+    "tests"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
+
