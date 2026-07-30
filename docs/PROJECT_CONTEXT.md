@@ -1,4 +1,4 @@
-# Contexto do Projeto — API REST de Gestão de Treinamentos (FertiGlobal)
+# Contexto do Projeto — API REST de Gestão de Treinamentos (F`****`G`*****`)
 
 > Documento de onboarding e referência arquitetural. Antes de propor ou implementar uma mudança, valide-a contra estas decisões.
 

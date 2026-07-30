@@ -5,7 +5,7 @@ Este conjunto documental consolida, de forma estruturada e formal, a visão func
 
 ## Capa do Documento
 
-**Cliente:** FertiGlobal Brasil
+**Cliente:** F`****`G`*****` B`*****`
 
 **Projeto:** Sistema de Gestão de Treinamentos
 
