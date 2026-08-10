@@ -2,13 +2,13 @@ import { Prisma } from '@prisma/client';
 import { ZodError } from 'zod';
 
 import { AppError } from './app-error';
-import { ERROR_CODES } from './error-codes';
+import { ERROR_TYPES } from './error-types';
 
 const INTERNAL_ERROR_MESSAGE = 'Erro interno do servidor.';
 
 function normalizeZodError(error: ZodError): AppError {
     return new AppError({
-        error: ERROR_CODES.VALIDATION_ERROR,
+        error: ERROR_TYPES.VALIDATION_ERROR,
         message: 'Dados de entrada inválidos.',
         details: error.issues.map((issue) => ({
             code: issue.code,
@@ -26,21 +26,21 @@ function normalizePrismaError(
     switch (error.code) {
         case 'P2002':
             return new AppError({
-                error: ERROR_CODES.CONFLICT,
+                error: ERROR_TYPES.CONFLICT,
                 message: 'Registro duplicado.',
                 cause: error,
             });
 
         case 'P2025':
             return new AppError({
-                error: ERROR_CODES.NOT_FOUND,
+                error: ERROR_TYPES.NOT_FOUND,
                 message: 'Registro não encontrado.',
                 cause: error,
             });
 
         default:
             return new AppError({
-                error: ERROR_CODES.INTERNAL_ERROR,
+                error: ERROR_TYPES.INTERNAL_ERROR,
                 message: INTERNAL_ERROR_MESSAGE,
                 cause: error,
             });
@@ -62,14 +62,14 @@ export function normalizeError(error: unknown): AppError {
 
     if (error instanceof Prisma.PrismaClientValidationError) {
         return new AppError({
-            error: ERROR_CODES.BAD_REQUEST,
+            error: ERROR_TYPES.BAD_REQUEST,
             message: 'Consulta inválida.',
             cause: error,
         });
     }
 
     return new AppError({
-        error: ERROR_CODES.INTERNAL_ERROR,
+        error: ERROR_TYPES.INTERNAL_ERROR,
         message: INTERNAL_ERROR_MESSAGE,
         cause: error,
     });

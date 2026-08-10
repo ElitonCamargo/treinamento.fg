@@ -3,7 +3,7 @@ export interface ErrorDefinition {
     status: number;
 }
 
-export const ERROR_CODES = {
+export const ERROR_TYPES = {
   INTERNAL_ERROR: {
     code: 'INTERNAL_ERROR',
     status: 500,
@@ -40,5 +40,5 @@ export const ERROR_CODES = {
   },
 } satisfies Record<string, ErrorDefinition>;
 
-export type ErrorCode =
-  (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
+export type ErrorTypes =
+  (typeof ERROR_TYPES)[keyof typeof ERROR_TYPES];

@@ -1,14 +1,14 @@
-import type { ErrorCode } from './error-codes';
+import type { ErrorTypes } from './error-types';
 
 export interface AppErrorOptions {
-  error: ErrorCode;
+  error: ErrorTypes;
   message: string;
   details?: unknown;
   cause?: unknown;
 }
 
 export class AppError extends Error {
-  public readonly code: ErrorCode['code'];
+  public readonly code: ErrorTypes['code'];
 
   public readonly statusCode: number;
 

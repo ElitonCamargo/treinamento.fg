@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { AppError, ERROR_CODES } from '@/core/errors';
+import { AppError, ERROR_TYPES } from '@/core/errors';
 import { errorMiddleware } from '@/core/middleware/error-middleware';
 import { routes } from '@/routes';
 
@@ -24,7 +24,7 @@ app.use('/api', routes);
 app.use((_request, _response, next) => {
   next(
     new AppError({
-      error: ERROR_CODES.NOT_FOUND,
+      error: ERROR_TYPES.NOT_FOUND,
       message: 'Rota não encontrada.',
     }),
   );
