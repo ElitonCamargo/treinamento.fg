@@ -30,6 +30,7 @@ app.use((_request, _response, next) => {
   );
 });
 
+
 /**
  * Último middleware da aplicação.
  */

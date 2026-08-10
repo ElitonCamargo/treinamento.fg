@@ -38,6 +38,9 @@ export const errorMiddleware: ErrorRequestHandler = (
       ...(appError.details !== undefined && {
         details: appError.details,
       }),
+      ...(appError.cause !== undefined && {
+        cause: appError.cause,
+      }),
     },
   });
 };
